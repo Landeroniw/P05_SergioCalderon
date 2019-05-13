@@ -1,0 +1,68 @@
+
+<html>
+<head>
+        <link href="main.css" rel="stylesheet"/>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  
+    <title>P05</title>
+    <meta name="generator" content="MATLAB 9.6">
+    <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+    <meta name="DC.date" content="2019-04-15"><meta name="DC.source" content="fun1.m">
+</head>
+    
+<body>
+     <h1 id ="gg">UPIITA</h1>  
+        <h1 id ="gg">IPN</h1>
+        <h1 id ="gg">Integrantes:</h1> 
+        <p>        Bravo Padilla Eric</p>
+        <p>        Calderon Landeros Sergio David</p>
+        <p>        Sanchez Lara Jose Maria</p>
+        <p>        Noe Millan Yuval Zuriel</p>
+        <p></p>
+<h1 id ="gg">Ejemplo 6.1</h1> 
+    <div class="content"><pre class="codeinput">d0=0.5043;
+a=-7;
+b=7;
+t0=0;
+tf=pi;
+f=@(t) ((t&gt;0)&amp;(t&lt;=pi)).*exp(-t/2);
+cn=@(n) 0.5043*(2/((1+16*n^2)^(1/2)));
+tn=@(n) -atan(4*n);
+armo=4;
+so=@(t) f(t)+f(t+pi)+f(t+2*pi)+f(t+3*pi)+f(t-pi)+f(t-2*pi)+f(t-3*pi);
+sfc(t0,tf,cn,d0,so,armo,a,b,tn)
+</pre><pre class="codeoutput">C0 = 0.5043
+C1 = 0.24462
+C2 = 0.1251
+C3 = 0.08376
+C4 = 0.062915
+</pre><img vspace="5" hspace="5" src="Prueba_01.png" alt="">
+        <div class="content"><pre class="codeinput">d0=0.5043;
+a=-21;
+b=24;
+t0=0;
+tf=pi;
+f=@(t) ((t&gt;0)&amp;(t&lt;=pi)).*exp(-t/2);
+cn=@(n) 0.5043*(2/((1+16*n^2)^(1/2)));
+tn=@(n) -atan(4*n);
+armo=15;
+so=@(t) f(t)+f(t+pi)+f(t+2*pi)+f(t+3*pi)+f(t-pi)+f(t-2*pi)+f(t-3*pi)+f(t+4*pi)+f(t-4*pi)+f(t+5*pi)+f(t-5*pi)+f(t-6*pi)+f(t+6*pi)+f(t+7*pi)+f(t-7*pi);
+sfc(t0,tf,cn,d0,so,armo,a,b,tn)
+</pre><pre class="codeoutput">C0 = 0.5043
+C1 = 0.24462
+C2 = 0.1251
+C3 = 0.08376
+C4 = 0.062915
+C5 = 0.050367
+C6 = 0.041989
+C7 = 0.035998
+C8 = 0.031503
+C9 = 0.028006
+C10 = 0.025207
+C11 = 0.022917
+C12 = 0.021008
+C13 = 0.019393
+C14 = 0.018008
+C15 = 0.016808
+</pre><img vspace="5" hspace="5" src="Prueba11_01.png" alt=""> 
+</body></html>
