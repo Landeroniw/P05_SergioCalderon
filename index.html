@@ -65,4 +65,50 @@ C13 = 0.019393
 C14 = 0.018008
 C15 = 0.016808
 </pre><img vspace="5" hspace="5" src="Prueba11_01.png" alt=""> 
+            <h1 id ="gg">Ejemplo 6.2</h1> 
+            <div class="content"><pre class="codeinput">t0=-0.5;
+tf=1.5;
+armo=4;
+a=-7;
+b=7;
+c0=0;
+f=@(t) ((t&gt;-0.5)&amp;(t&lt;=0.5)).*(6*t) + ((0.5&lt;t)&amp;(1.5&gt;=t)).*(6*(1-t));
+cn=@(n) (8*3)/((pi*n)^2);
+
+sfcc(t0,tf,cn,c0,f,armo,a,b)
+</pre><pre class="codeoutput">C(-3) = 8.2722e-18+0.13509i
+C(-1) = 7.445e-17-1.2159i
+C(0) = 0
+C(1) = 7.445e-17-1.2159i
+C(3) = 8.2722e-18+0.13509i
+</pre><img vspace="5" hspace="5" src="Segundoejemplo_01.png" alt=""> 
+                
+<div class="content"><pre class="codeinput">t0=-0.5;
+tf=1.5;
+armo=15;
+a=-7;
+b=7;
+c0=0;
+f=@(t) ((t&gt;-0.5)&amp;(t&lt;=0.5)).*(6*t) + ((0.5&lt;t)&amp;(1.5&gt;=t)).*(6*(1-t));
+cn=@(n) (8*3)/((pi*n)^2);
+
+sfcc(t0,tf,cn,c0,f,armo,a,b)
+</pre><pre class="codeoutput">C(-15) = 3.3089e-19+0.0054038i
+C(-13) = 4.4053e-19-0.0071944i
+C(-11) = 6.1529e-19+0.010048i
+C(-9) = 9.1913e-19-0.015011i
+C(-7) = 1.5194e-18+0.024813i
+C(-5) = 2.978e-18-0.048634i
+C(-3) = 8.2722e-18+0.13509i
+C(-1) = 7.445e-17-1.2159i
+C(0) = 0
+C(1) = 7.445e-17-1.2159i
+C(3) = 8.2722e-18+0.13509i
+C(5) = 2.978e-18-0.048634i
+C(7) = 1.5194e-18+0.024813i
+C(9) = 9.1913e-19-0.015011i
+C(11) = 6.1529e-19+0.010048i
+C(13) = 4.4053e-19-0.0071944i
+C(15) = 3.3089e-19+0.0054038i
+</pre><img vspace="5" hspace="5" src="Segundoejemplo11_01.png" alt="">
 </body></html>
