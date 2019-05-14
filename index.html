@@ -135,7 +135,7 @@ D(14) = 0
 D(15) = 3.3089e-19+0.0054038i
 </pre><img vspace="5" hspace="5" src="Segundoejemplo11_01.png" alt="">
     
-     <h1 id ="gg">Ejemplo 6.3</h1> 
+     <h1 id ="gg">Ejemplo 6.4</h1> 
     
     
 <div class="content"><pre class="codeinput">cn=@(n) 2/(pi*n);
@@ -204,7 +204,7 @@ D(13) = 0.024485
 D(14) = 0
 D(15) = -0.021221-2.5988e-18i
 </pre><img vspace="5" hspace="5" src="Tercerejemplo11_01.png" alt="">
-    <h1 id ="gg">Ejemplo 6.4</h1> 
+    <h1 id ="gg">Ejemplo 6.5</h1> 
     <!-- -->
     <div class="content"><pre class="codeinput">d0=0.5043;
 a=-7;
@@ -272,7 +272,7 @@ D(15) = 0.00014004-0.0084027i
 </pre><img vspace="5" hspace="5" src="Cuartoejemplo11_01.png" alt="">
             
 <!---->
-  <h1 id ="gg">Ejemplo 6.5</h1>   
+  <h1 id ="gg">Ejemplo 6.7</h1>   
 <div class="content"><pre class="codeinput">T=3;
 dn=1/T;
 armo=4;
@@ -330,6 +330,181 @@ D(13) = 0.33333
 D(14) = 0.33333
 D(15) = 0.33333
 </pre><img vspace="5" hspace="5" src="Quintoejemplo11_01.png" alt=""> 
+    <h1 id = "gg">Ejercicio</h1>
+    <div class="content"><pre class="codeinput">x= @(t) exp(-t/2);
+t = linspace (-10, 10,20001);
+sumterms = zeros(16, length(t));
+sumterms(1,:) = 0.504;
+
+
+<span class="keyword">for</span> n = 1:size(sumterms,1)-1
+sumterms(n+1,:) = 0.504/(1+4*n*1j).*exp(2*n*t*j);
+<span class="keyword">end</span>
+
+x_N = cumsum (sumterms);
+figure(1);
+clf;
+ind = 0;
+
+<span class="keyword">for</span> N = [0,1:2:size(sumterms, 1)-1]
+    ind = ind+1;
+    subplot (3,3,ind);
+
+    plot (t,x_N(N+1,:),t,x(mod(t,pi)));
+    axis ([-10 10 -0.2 1.2]);
+    xlabel (<span class="string">'t'</span>);
+    ylabel ([<span class="string">'x_{'</span>, num2str(N) ,<span class="string">'} (t)'</span>]);
+<span class="keyword">end</span>
+</pre><img vspace="5" hspace="5" src="penultimo_01.png" alt="">
+    
+    <div class="content"><pre class="codeinput"><span class="comment">%FUNCION PARA ALGORITMO DEL TRAPECIO COMPUESTO</span>
+
+<span class="keyword">function</span> [int,error]= alg_trapecio(f,a,b,e)
+<span class="comment">%Siendo:</span>
+<span class="comment">%f= funcion a interar por algoritmo del trapecio compuesto</span>
+<span class="comment">%a= limite inferior de la integra</span>
+<span class="comment">%b= limite superior de la integra</span>
+<span class="comment">%e= numero que ajusta el error</span>
+
+n=15;<span class="comment">%valor solicitado por el ejercicio</span>
+
+
+h=(b-a)/n;
+ff=sym(f);
+dd=diff(diff(ff));
+ddf=matlabFunction(dd);
+int=(h/2)*(f(a)+f(b));
+error=-(((b-a)/12)*h^2)*ddf(e);
+suma=0;
+
+<span class="keyword">for</span> i=1:1:(n-1)
+    x0=a+i*h;
+    suma=suma+f(x0);
+<span class="keyword">end</span>
+int=int+h*suma;
+
+<span class="keyword">end</span>
+</pre>
+       
+        
+        <div class="content"><pre class="codeinput"><span class="comment">%Con Algoritmo de trapecio compuesto</span>
+</pre><pre class="codeinput">n=[0:1:4];
+Dn=[alg_trapecio(x_0,0,pi,pi/2)/T_0,alg_trapecio(x_1,0,pi,pi/2)/T_0,alg_trapecio(x_2,0,pi,pi/2)/T_0,alg_trapecio(x_3,0,pi,pi/2)/T_0,alg_trapecio(x_4,0,pi,pi/2)/T_0];
+
+disp(<span class="string">'Funcion: e^(-t/2)'</span>);
+disp(<span class="string">'De a: 0   hacia b: 3.1416'</span>);
+
+
+Magnitud=abs(Dn)
+Angulo=angle(Dn)
+
+
+
+clf;
+subplot (2, 2, 1);
+stem(n, abs( (Dn)),<span class="string">'k'</span>);
+axis ([-M M -.1 .6]);
+xlabel(<span class="string">'n'</span>);
+ylabel(<span class="string">'|D_n|'</span>);
+subplot (2, 2, 2);
+stem(n, angle((Dn)),<span class="string">'k'</span>);
+axis([-M M -pi pi]);
+xlabel (<span class="string">'n'</span>);
+ylabel(<span class="string">'\angle D n [rad]'</span>);
+hold <span class="string">on</span>
+</pre>
+            <pre class="codeinput"><span class="comment">%Con Programa de Lathi volvemos a obtener Dn</span>
+</pre><pre class="codeinput">T_0 = pi;
+N_0 = 256;
+T = T_0/N_0;
+t = (0:T:T*(N_0-1))';
+M = 10;
+x = exp(-t/2);
+x(1) = (exp(-pi/2) + 1)/2;
+
+figure(1)
+
+D_n = fft (x)/N_0;
+n = [-N_0/2:N_0/2-1]';
+
+<span class="keyword">for</span> a = 1:1:5
+mag(a)=abs(fftshift(D_n(a)));
+<span class="keyword">end</span>
+<span class="keyword">for</span> a = 1:1:5
+ang(a)=angle(fftshift(D_n(a)));
+<span class="keyword">end</span>
+mag
+ang
+
+
+
+clf;
+subplot (2, 2, 1);
+stem(n, abs(fftshift (D_n)),<span class="string">'k'</span>);
+axis ([-M M -.1 .6]);
+xlabel(<span class="string">'n'</span>); ylabel(<span class="string">'|D_n|'</span>);
+subplot (2, 2, 2);
+stem(n, angle(fftshift(D_n)),<span class="string">'k'</span>);
+axis([-M M -pi pi]);
+xlabel (<span class="string">'n'</span>);
+ylabel(<span class="string">'\angle D n [rad]'</span>);
+
+n = [0:M];
+C_n(1) = abs(D_n(1));
+C_n(2:M+1) = 2*abs (D_n(2:M+1));
+theta_n(1) = angle(D_n(1));
+theta_n(2:M+1) = angle(D_n(2:M+1));
+subplot (2, 2, 3); stem(n,C_n,<span class="string">'k'</span>);
+
+xlabel (<span class="string">'n'</span>); ylabel(<span class="string">'C_n'</span>);
+subplot (2, 2, 4);
+stem(n,theta_n,<span class="string">'k'</span>);
+xlabel (<span class="string">'n'</span>); ylabel(<span class="string">'\theta n [rad]'</span>);
+</pre><p>La serie de Fourier exponencial compleja tiene Dn: <img src="penultimo_eq11462128157880710935.png" alt="$\left.\frac{-1}{\pi (1/2+j2n)}e^{-(1/2+j2n)t}\right |_{t=0}^{\pi}$" style="width:144px;height:28px;"> Para un resultado mas exacto : <img src="penultimo_eq08029797175683308747.png" alt="$\frac{-1}{\pi (1/2+j2n)}(e^{-\frac{\pi}{2}}-1)$" style="width:114px;height:21px;"></p><pre class="codeinput"><span class="keyword">for</span> n=2:1:5
+   magnitud_exacta(n)=abs((-exp(-pi/2)+1)/(pi*(0.5+2j*(n-1))));
+<span class="keyword">end</span>
+magnitud_exacta(1)=abs((-exp(-pi/2)+1)/(pi*(0.5)));
+
+<span class="keyword">for</span> n=2:1:5
+   angulo_exacto(n)=angle((-exp(-pi/2)+1)/(pi*(0.5+2j*(n-1))));
+<span class="keyword">end</span>
+angulo_exacto(1)=angle((-exp(-pi/2)+1)/(pi*(0.5)));
+
+<span class="comment">%%TABLAS DE COMPARACION</span>
+
+MyA = table(Magnitud',Angulo',mag',ang',magnitud_exacta',angulo_exacto');
+MyA(1:5,:);
+MyA.Properties.RowNames = {<span class="string">'D0'</span>,<span class="string">'D1'</span>,<span class="string">'D2'</span>,<span class="string">'D3'</span>,<span class="string">'D4'</span>};
+MyA.Properties.VariableNames{<span class="string">'Var1'</span>} = <span class="string">'Magnitud_ATC'</span>;
+MyA.Properties.VariableNames{<span class="string">'Var2'</span>} = <span class="string">'Angulo_ATC'</span>;
+MyA.Properties.VariableNames{<span class="string">'Var3'</span>} = <span class="string">'Magnitud_Lathi'</span>;
+MyA.Properties.VariableNames{<span class="string">'Var4'</span>} = <span class="string">'Angulo_Lathi'</span>;
+MyA.Properties.VariableNames{<span class="string">'Var5'</span>} = <span class="string">'Magnitud_Exacta'</span>;
+MyA.Properties.VariableNames{<span class="string">'Var6'</span>} = <span class="string">'Angulo_Exacto'</span>
+
+TRAPE=Magnitud.*exp(1j*Angulo);
+LATHI=mag.*exp(1j.*ang);
+EXACTO=magnitud_exacta.*exp(1j*angulo_exacto);
+
+Dns= table(LATHI',TRAPE',EXACTO');
+Dns.Properties.RowNames = {<span class="string">'D0'</span>,<span class="string">'D1'</span>,<span class="string">'D2'</span>,<span class="string">'D3'</span>,<span class="string">'D4'</span>};
+Dns.Properties.VariableNames{<span class="string">'Var1'</span>} = <span class="string">'Dn_segunLathi'</span>;
+Dns.Properties.VariableNames{<span class="string">'Var2'</span>} = <span class="string">'Dn_SegunAlgTrapComp'</span>;
+Dns.Properties.VariableNames{<span class="string">'Var3'</span>} = <span class="string">'Dn_Exacto'</span>
+
+<span class="comment">% Comparaci&oacute;n</span>
+LATHI_EXACTO=abs(EXACTO-LATHI);
+TRAPE_EXACTO=abs(EXAC-TRAPE);
+
+Comp= table(LATHI_EXACTO',TRAPE_EXACTO');
+Comp.Properties.RowNames = {<span class="string">'D0'</span>,<span class="string">'D1'</span>,<span class="string">'D2'</span>,<span class="string">'D3'</span>,<span class="string">'D4'</span>};
+Comp.Properties.VariableNames{<span class="string">'Var1'</span>} = <span class="string">'ERROR_Lathi'</span>;
+Comp.Properties.VariableNames{<span class="string">'Var2'</span>} = <span class="string">'ERROR_del_Algoritmo'</span>
+</pre><pre class="codeinput">El <span class="string">metodo</span> <span class="string">utilizado</span> <span class="string">en</span> <span class="string">el</span> <span class="string">Lathi</span> <span class="string">del</span> <span class="string">DFT(discrete Fourier transform)</span> <span class="string">es</span>
+mas <span class="string">acercado</span> <span class="string">a</span> <span class="string">los</span> <span class="string">valores</span> <span class="string">exactos</span> <span class="string">que</span> <span class="string">el</span> <span class="string">algoritmo</span> <span class="string">del</span> <span class="string">trapecio</span>
+compuesto
+</pre>
+<!---->
     <h1 id ="gg">Referencias</h1> 
     
     <a href="https://la.mathworks.com/help/">MatLab</a>
