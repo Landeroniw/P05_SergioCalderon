@@ -23,6 +23,7 @@
     <img src="01.PNG" class="responsive2">
     <img src="02.PNG" class="responsive2">
     <img src="03.PNG" class="responsive2">
+    <img src="03.PNG" class="responsive2">
 <h1 id ="gg">Ejemplo 6.1</h1> 
     <div class="content"><pre class="codeinput">d0=0.5043;
 a=-7;
@@ -80,12 +81,16 @@ f=@(t) ((t&gt;-0.5)&amp;(t&lt;=0.5)).*(6*t) + ((0.5&lt;t)&amp;(1.5&gt;=t)).*(6*(
 cn=@(n) (8*3)/((pi*n)^2);
 
 sfcc(t0,tf,cn,c0,f,armo,a,b)
-</pre><pre class="codeoutput">C(-3) = 8.2722e-18+0.13509i
-C(-1) = 7.445e-17-1.2159i
-C(0) = 0
-C(1) = 7.445e-17-1.2159i
-C(3) = 8.2722e-18+0.13509i
-</pre><img vspace="5" hspace="5" src="Segundoejemplo_01.png" alt=""> 
+</pre><pre class="codeoutput">D(-4) = 0
+D(-3) = 8.2722e-18+0.13509i
+D(-2) = 0
+D(-1) = 7.445e-17-1.2159i
+D(0) = 0
+D(1) = 7.445e-17-1.2159i
+D(2) = 0
+D(3) = 8.2722e-18+0.13509i
+D(4) = 0
+</pre><img vspace="5" hspace="5" src="Segundoejemplo_01.png" alt=""> <p class="footer"><br>
                 
 <div class="content"><pre class="codeinput">t0=-0.5;
 tf=1.5;
@@ -97,22 +102,107 @@ f=@(t) ((t&gt;-0.5)&amp;(t&lt;=0.5)).*(6*t) + ((0.5&lt;t)&amp;(1.5&gt;=t)).*(6*(
 cn=@(n) (8*3)/((pi*n)^2);
 
 sfcc(t0,tf,cn,c0,f,armo,a,b)
-</pre><pre class="codeoutput">C(-15) = 3.3089e-19+0.0054038i
-C(-13) = 4.4053e-19-0.0071944i
-C(-11) = 6.1529e-19+0.010048i
-C(-9) = 9.1913e-19-0.015011i
-C(-7) = 1.5194e-18+0.024813i
-C(-5) = 2.978e-18-0.048634i
-C(-3) = 8.2722e-18+0.13509i
-C(-1) = 7.445e-17-1.2159i
-C(0) = 0
-C(1) = 7.445e-17-1.2159i
-C(3) = 8.2722e-18+0.13509i
-C(5) = 2.978e-18-0.048634i
-C(7) = 1.5194e-18+0.024813i
-C(9) = 9.1913e-19-0.015011i
-C(11) = 6.1529e-19+0.010048i
-C(13) = 4.4053e-19-0.0071944i
-C(15) = 3.3089e-19+0.0054038i
+</pre><pre class="codeoutput">D(-15) = 3.3089e-19+0.0054038i
+D(-14) = 0
+D(-13) = 4.4053e-19-0.0071944i
+D(-12) = 0
+D(-11) = 6.1529e-19+0.010048i
+D(-10) = 0
+D(-9) = 9.1913e-19-0.015011i
+D(-8) = 0
+D(-7) = 1.5194e-18+0.024813i
+D(-6) = 0
+D(-5) = 2.978e-18-0.048634i
+D(-4) = 0
+D(-3) = 8.2722e-18+0.13509i
+D(-2) = 0
+D(-1) = 7.445e-17-1.2159i
+D(0) = 0
+D(1) = 7.445e-17-1.2159i
+D(2) = 0
+D(3) = 8.2722e-18+0.13509i
+D(4) = 0
+D(5) = 2.978e-18-0.048634i
+D(6) = 0
+D(7) = 1.5194e-18+0.024813i
+D(8) = 0
+D(9) = 9.1913e-19-0.015011i
+D(10) = 0
+D(11) = 6.1529e-19+0.010048i
+D(12) = 0
+D(13) = 4.4053e-19-0.0071944i
+D(14) = 0
+D(15) = 3.3089e-19+0.0054038i
 </pre><img vspace="5" hspace="5" src="Segundoejemplo11_01.png" alt="">
+    
+     <h1 id ="gg">Ejemplo 6.3</h1> 
+    
+    
+<div class="content"><pre class="codeinput">cn=@(n) 2/(pi*n);
+f=@(t) ((t&lt;=(pi/2))&amp;(t&gt;(-pi/2))).*1 + (((pi/2)&lt;t)&amp;(t&lt;=(3*pi)/2)).*0;
+t0=-pi;
+tf=pi;
+c0=1/2;
+armo=4;
+a=-7;
+b=7;
+tn=-pi;
+
+sfccc(t0,tf,cn,c0,f,armo,a,b,tn)
+</pre><pre class="codeoutput">D(-4) = 0
+D(-3) = 0.1061-1.2994e-17i
+D(-2) = 0
+D(-1) = -0.31831
+D(0) = 0.5
+D(1) = 0.31831
+D(2) = 0
+D(3) = -0.1061-1.2994e-17i
+D(4) = 0
+</pre><img vspace="5" hspace="5" src="Tercerejemplo_01.png" alt="">
+    
+    
+<div class="content"><pre class="codeinput">cn=@(n) 2/(pi*n);
+f=@(t) ((t&lt;=(pi/2))&amp;(t&gt;(-pi/2))).*1 + (((pi/2)&lt;t)&amp;(t&lt;=(3*pi)/2)).*0;
+t0=-pi;
+tf=pi;
+c0=1/2;
+armo=15;
+a=-7;
+b=7;
+tn=-pi;
+
+sfccc(t0,tf,cn,c0,f,armo,a,b,tn)
+</pre><pre class="codeoutput">D(-15) = 0.021221-2.5988e-18i
+D(-14) = 0
+D(-13) = -0.024485
+D(-12) = 0
+D(-11) = 0.028937-3.5438e-18i
+D(-10) = 0
+D(-9) = -0.035368
+D(-8) = 0
+D(-7) = 0.045473-5.5688e-18i
+D(-6) = 0
+D(-5) = -0.063662
+D(-4) = 0
+D(-3) = 0.1061-1.2994e-17i
+D(-2) = 0
+D(-1) = -0.31831
+D(0) = 0.5
+D(1) = 0.31831
+D(2) = 0
+D(3) = -0.1061-1.2994e-17i
+D(4) = 0
+D(5) = 0.063662
+D(6) = 0
+D(7) = -0.045473-5.5688e-18i
+D(8) = 0
+D(9) = 0.035368
+D(10) = 0
+D(11) = -0.028937-3.5438e-18i
+D(12) = 0
+D(13) = 0.024485
+D(14) = 0
+D(15) = -0.021221-2.5988e-18i
+</pre><img vspace="5" hspace="5" src="Tercerejemplo11_01.png" alt="">
+    
 </body></html>
